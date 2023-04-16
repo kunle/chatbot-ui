@@ -2,8 +2,12 @@ version: '3.6'
 
 services:
   chatgpt:
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.dev
+    volumes:
+      - ./:/app
+      - /app/node_modules/
     ports:
       - 3000:3000
-    environment:
-      - 'OPENAI_API_KEY='
+    env_file: ./.env.local
